@@ -53,7 +53,7 @@ class Controller {
           },
           {
             model: Nucleus,
-            as: "Parents",
+            as: "Children",
             include: ["Parents", "Children"],
           },
         ],
@@ -61,7 +61,9 @@ class Controller {
       if (!memberData) {
         throw { name: "NotFound" };
       }
-      res.json(memberData);
+      // res.json(memberData);
+      // console.log()
+      res.render("members",{data:memberData})
     } catch (error) {
       next(error);
     }
@@ -93,7 +95,8 @@ class Controller {
       if (!member) {
         throw { name: "NotFound" };
       }
-      res.json(member);
+      // res.json(member);
+      res.render("members-detail",{data:member})
     } catch (error) {
       next(error);
     }

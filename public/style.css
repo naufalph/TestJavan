@@ -1,0 +1,36 @@
+* {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+table,td,th {
+  border: 1px solid;
+  padding:4px;
+}
+nav, h1.title, h2.title{
+  margin: auto;
+  margin-bottom: 5mm;
+  width: fit-content;
+}
+nav a {
+  margin:5mm
+}
+table.main-content {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+td.cell-button {
+  text-align: center;
+}
+.input-box, .inputradio-box, .select-box {
+  width: fit-content;
+  margin: auto;
+  margin-bottom: 15px;
+}
+.input-box input{
+  width: 100%;
+}
+.table-filter {
+  width: fit-content;
+  margin: auto;
+  margin-bottom: 15px;
+}

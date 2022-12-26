@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Store</title>
+  </head>
+  <body>
+    <h1 class="title">Member Detail : <%= data.name %></h1>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Deskripsi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Nama</td>
+            <td><%= data.name %></td>
+          </tr>
+          <tr>
+            <td>Total Aset</td>
+            <td><%= data.totalAsset %></td>
+          </tr>
+          <tr>
+            <td>Nama Orang Tua</td>
+            <td><%= data.Children[0]?.Parents.name %></td>
+          </tr>
+          <% for( let index = 0; index < data.Parents.length; index++ ) { %>
+          <tr>
+            <td>Nama Anak ke - <%= index+1 %></td>
+            <td><%= data.Parents[index]?.Children.name %></td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <a href="/members/<%= data.id %>"><button>Edit Member Detail</button></a>
+    </div>
+  </body>
+</html>

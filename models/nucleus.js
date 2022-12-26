@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Nucleus.belongsTo(models.Member, { foreignKey: "parentId" });
-      Nucleus.belongsTo(models.Member, { foreignKey: "childId" });
+      Nucleus.belongsTo(models.Member, { as: 'Parents',foreignKey: "parentId" });
+      Nucleus.belongsTo(models.Member, { as: 'Children', foreignKey: "childId" });
     }
   }
   Nucleus.init(

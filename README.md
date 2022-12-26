@@ -14,3 +14,12 @@ npx sequelize-cli db:create
 npx sequelize-cli db:migrate
 npx sequelize-cli db:seed:all
 ```
+3. Run development through nodemon :
+```cmd
+npm run dev
+```
+4. Sync seed datas with :
+```http
+method: "GET"
+localhost:3000/syncAll
+```

@@ -23,12 +23,12 @@ class Controller {
   }
   static async updateOneAsset(memberId) {
     try {
-      console.log(memberId, "<< memberId");
+      // console.log(memberId, "<< memberId");
       const assetData = await Asset.findAll({
         where: { memberId },
         include: [Product],
       });
-      console.log(assetData, "<< assetData");
+      // console.log(assetData, "<< assetData");
       let totalAsset = 0;
       for (let j = 0; j < assetData.length; j++) {
         totalAsset += assetData[j].dataValues.Product.price;

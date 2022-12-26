@@ -21,5 +21,9 @@ npm run dev
 4. Sync seed datas with :
 ```http
 method: "GET"
-localhost:3000/syncAll
+localhost:3000/syncAll 
+```
+or 
+```js
+hit refresh on home page
 ```

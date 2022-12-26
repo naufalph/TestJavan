@@ -16,7 +16,8 @@ class Controller {
         }
         await Member.update({ totalAsset }, { where: { id: members[i].id } });
       }
-      res.json(await Member.findAll());
+      // res.json(await Member.findAll());
+      res.redirect("/members")
     } catch (error) {
       next(error);
     }
@@ -63,7 +64,7 @@ class Controller {
       }
       // res.json(memberData);
       // console.log()
-      res.render("members",{data:memberData})
+      res.render("members", { data: memberData });
     } catch (error) {
       next(error);
     }
@@ -96,7 +97,16 @@ class Controller {
         throw { name: "NotFound" };
       }
       // res.json(member);
-      res.render("members-detail",{data:member})
+      res.render("members-detail", { data: member });
+    } catch (error) {
+      next(error);
+    }
+  }
+  static async fetchPostMember(req, res, next) {
+    try {
+      const products = await Product.findAll();
+      const members = await Member.findAll();
+      res.render("members-add", { products, members });
     } catch (error) {
       next(error);
     }
@@ -132,25 +142,22 @@ class Controller {
         }
       );
 
-      const { products } = req.body;
-      for (let i = 0; i < products.length; i++) {
-        if (!products[i]) {
-          continue;
-        } else {
-          await Asset.create(
-            {
-              memberId: newMember.id,
-              productId: products[i],
-            },
-            {
-              transaction: t,
-            }
-          );
+      const { firstProductId } = req.body;
+
+      await Asset.create(
+        {
+          memberId: newMember.id,
+          productId: firstProductId,
+        },
+        {
+          transaction: t,
         }
-      }
+      );
+
       Controller.updateOneAsset(newMember.id);
       await t.commit();
-      res.json({ message: "new member has been created" });
+      // res.json({ message: "new member has been created" });
+      res.redirect("/members")
     } catch (error) {
       await t.rollback();
       next(error);
@@ -170,7 +177,7 @@ class Controller {
       });
       await t.commit();
       // res.json({ message: "member has been deleted" });
-      res.redirect(`/members`)
+      res.redirect(`/members`);
     } catch (error) {
       await t.rollback();
       next(error);
@@ -205,10 +212,32 @@ class Controller {
       }
 
       await t.commit();
-      res.json({ message: "member has been updated" });
+      // res.json({ message: "member has been updated" });
+      res.redirect(`/members/${memberId}`);
     } catch (error) {
       await t.rollback();
       next(error);
+    }
+  }
+  static async getEditMember(req,res,next){
+    try {
+      const memberId = +req.params.id;
+      const memberData = await Member.findOne({
+        where: { id: memberId },
+        include: {
+          model: Nucleus,
+          as: "Children",
+          include: ["Parents", "Children"],
+        },
+      });
+      const members = await Member.findAll()
+      const products = await Product.findAll({
+        
+      });
+      // res.json({ products, members, memberData });
+      res.render("members-edit", { products, members , memberData });
+    } catch (error) {
+      next(error)
     }
   }
 }

@@ -14,9 +14,17 @@
     <title>Store</title>
   </head>
   <body>
-    <h1 class="title">Javan Test</h1>
+    <div class="text-center my-4">
+      <h1 class="title">Javan Test</h1>
+      <a href="/members/add"
+            ><button type="button" class="btn btn-primary">Add Member</button></a
+          >
+      <a href="/syncAll"
+            ><button type="button" class="btn btn-white">Refresh</button></a
+          >
+    </div>
     <div>
-      <table class="main-content">
+      <table class="main-content table">
         <tr>
           <th>Name</th>
           <th>total Asset</th>
@@ -29,14 +37,23 @@
           <td><%= element.totalAsset %></td>
           <td><%= element.Children[0]?.Parents.name %></td>
           <td class="cell-button">
-            <a href="/members/<%= element.id %>"><button>See Detail</button></a>
+            <a href="/members/<%= element.id %>"
+              ><button type="button" class="btn btn-info">
+                See Detail
+              </button></a
+            >
             <a href="/members/delete/<%= element.id %>"
-              ><button>Delete</button></a
+              ><button type="button" class="btn btn-danger">Delete</button></a
             >
           </td>
         </tr>
         <% }) %>
       </table>
+      <div class="text-center">
+        <a href="/members/add"
+          ><button type="button" class="btn btn-primary">Add Member</button></a
+        >
+      </div>
     </div>
   </body>
 </html>

@@ -14,9 +14,14 @@
     <title>Member Detail</title>
   </head>
   <body>
-    <h1 class="title">Member Detail : <%= data.name %></h1>
+    <div class="d-flex justify-content-center">
+      <h1 class="title">Member Detail : <%= data.name %></h1>
+      <a href="/"
+          ><button type="button" class="btn btn-dark">Home</button></a
+        >
+    </div>
     <div>
-      <table class="main-content">
+      <table class="main-content table">
         <thead>
           <tr>
             <th>Parameter</th>
@@ -45,12 +50,17 @@
         </tbody>
       </table>
       <div style="text-align: center; margin-top: 10px; margin-bottom: 50px">
-        <a href="/members/<%= data.id %>"
-          ><button>Edit Member Detail</button></a
+        <a href="/members/edit/<%= data.id %>"
+          ><button type="button" class="btn btn-primary">Edit Member Detail</button></a
         >
       </div>
-      <h4>Aset <%= data.name %></h4>
-      <table>
+      <div class="d-flex flex-row justify-content-center">
+        <h4 class="mx-4">Aset <%= data.name %></h4>
+        <a href="/assets/add/<%= data.id %>"
+            ><button type="button" class="btn btn-primary">Add Asset</button></a
+          >
+      </div>
+      <table class="main-content table">
         <thead>
           <tr>
             <th>Nama Aset</th>
@@ -67,19 +77,17 @@
             <td><%= data.Assets[i].Product?.price %></td>
             <td>
               <a href="/assets/<%= data.Assets[i].id %>"
-                ><button>Edit</button></a
+                ><button type="button" class="btn btn-primary">Edit</button></a
               >
               <a href="/assets/delete/<%= data.Assets[i].id %>"
-                ><button>Delete</button></a
+                ><button type="button" class="btn btn-danger">Delete</button></a
               >
             </td>
           </tr>
           <% } %>
         </tbody>
       </table>
-      <a href="/assets/add/<%= data.id %>"
-        ><button>Add</button></a
-      >
+      
     </div>
   </body>
 </html>

@@ -1,31 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/style.css">
-  <title>Store</title>
-</head>
-<body>
-  <h1 class="title">Javan Test</h1>
-  <div >
-    <table class="main-content">
-      <tr>
-        <th>Name</th>
-        <th>total Asset</th>
-        <th>Parent</th>
-        <th>Action</th>
-      </tr>
-      <% data.forEach(element => { %>
-       <tr>
-        <td><%= element.name %> </td>
-        <td><%= element.totalAsset %> </td>
-        <td><%= element.Children[0]?.Parents.name %> </td>
-        <td class="cell-button"><a href="/members/<%= element.id %>" ><button>See Detail</button></a> </td>
-       </tr>
-      <% }) %>
-    </table>
-  </div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <title>Store</title>
+  </head>
+  <body>
+    <h1 class="title">Javan Test</h1>
+    <div>
+      <table class="main-content">
+        <tr>
+          <th>Name</th>
+          <th>total Asset</th>
+          <th>Parent</th>
+          <th>Action</th>
+        </tr>
+        <% data.forEach(element => { %>
+        <tr>
+          <td><%= element.name %></td>
+          <td><%= element.totalAsset %></td>
+          <td><%= element.Children[0]?.Parents.name %></td>
+          <td class="cell-button">
+            <a href="/members/<%= element.id %>"><button>See Detail</button></a>
+            <a href="/members/delete/<%= element.id %>"
+              ><button>Delete</button></a
+            >
+          </td>
+        </tr>
+        <% }) %>
+      </table>
+    </div>
+  </body>
 </html>

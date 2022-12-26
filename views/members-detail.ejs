@@ -5,12 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/style.css" />
-    <title>Store</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <title>Member Detail</title>
   </head>
   <body>
     <h1 class="title">Member Detail : <%= data.name %></h1>
     <div>
-      <table>
+      <table class="main-content">
         <thead>
           <tr>
             <th>Parameter</th>
@@ -38,7 +44,42 @@
           <% } %>
         </tbody>
       </table>
-      <a href="/members/<%= data.id %>"><button>Edit Member Detail</button></a>
+      <div style="text-align: center; margin-top: 10px; margin-bottom: 50px">
+        <a href="/members/<%= data.id %>"
+          ><button>Edit Member Detail</button></a
+        >
+      </div>
+      <h4>Aset <%= data.name %></h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Nama Aset</th>
+            <th>Deskripsi</th>
+            <th>Harga</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for( let i = 0; i < data.Assets.length; i++ ) { %>
+          <tr>
+            <td><%= data.Assets[i].Product?.title %></td>
+            <td><%= data.Assets[i].Product?.description %></td>
+            <td><%= data.Assets[i].Product?.price %></td>
+            <td>
+              <a href="/assets/<%= data.Assets[i].id %>"
+                ><button>Edit</button></a
+              >
+              <a href="/assets/delete/<%= data.Assets[i].id %>"
+                ><button>Delete</button></a
+              >
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <a href="/assets/add/<%= data.id %>"
+        ><button>Add</button></a
+      >
     </div>
   </body>
 </html>

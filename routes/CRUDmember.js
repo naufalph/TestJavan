@@ -3,8 +3,8 @@ const Controller = require("../controllers/member")
 
 router.get("/", Controller.findAllMember);
 router.post("/add", Controller.postMember);
+router.get("/delete/:id", Controller.deleteMember);
 router.get("/:id", Controller.findOneMember);
-router.delete("/:id", Controller.deleteMember);
-router.put("/:id", Controller.editMember);
+router.post("/edit/:id", Controller.editMember);
 
 module.exports = {router};

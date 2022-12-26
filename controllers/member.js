@@ -169,7 +169,8 @@ class Controller {
         transaction: t,
       });
       await t.commit();
-      res.json({ message: "member has been deleted" });
+      // res.json({ message: "member has been deleted" });
+      res.redirect(`/members`)
     } catch (error) {
       await t.rollback();
       next(error);

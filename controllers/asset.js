@@ -17,7 +17,8 @@ class AssetController {
       );
       Controller.updateOneAsset(memberId);
       await t.commit();
-      res.json({ message: "asset has been added" });
+      // res.json({ message: "asset has been added" });
+      res.redirect(`/members/${memberId}`);
     } catch (error) {
       await t.rollback();
       next(error);
@@ -37,7 +38,8 @@ class AssetController {
       });
       Controller.updateOneAsset(asset.dataValues.memberId);
       await t.commit();
-      res.json({ message: "asset has been deleted" });
+      // res.json({ message: "asset has been deleted" });
+      res.redirect(`/members/${asset.dataValues.memberId}`);
     } catch (error) {
       await t.rollback();
       next(error);
@@ -46,7 +48,8 @@ class AssetController {
   static async fetchProducts(req, res, next) {
     try {
       const productData = await Product.findAll();
-      res.json(productData);
+      // res.json(productData);
+      res.render("assets-add",{id:+req.params.memberId, products : productData})
     } catch (error) {
       next(error);
     }
@@ -69,12 +72,26 @@ class AssetController {
         transaction: t,
         returning: true,
       });
-      console.log(asset[1],"??Asset");
+      console.log(asset[1], "??Asset");
       Controller.updateOneAsset(asset[1][0].dataValues.memberId);
       await t.commit();
-      res.json({ message: "asset has been updated" });
+      // res.json({ message: "asset has been updated" });
+      res.redirect(`/members/${asset[1][0].dataValues.memberId}`);
     } catch (error) {
       await t.rollback();
+      next(error);
+    }
+  }
+  static async getAsset(req, res, next) {
+    try {
+      const asset = await Asset.findOne({
+        where: { id: +req.params.id },
+        include : Product
+      });
+      const products = await Product.findAll();
+      // res.json(asset)
+      res.render("assets-edit", { asset, products });
+    } catch (error) {
       next(error);
     }
   }

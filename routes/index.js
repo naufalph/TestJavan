@@ -6,6 +6,7 @@ const { router: assetRoute } = require("./CRUDasset");
 
 router.get("/syncAll", Controller.updateAllAsset);
 
+router.get("/",(req,res)=>{res.redirect("/members")})
 router.use("/members", memberRoute);
 router.use("/assets", assetRoute);
 

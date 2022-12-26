@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       Member.hasMany(models.Nucleus, { foreignKey: "childId" });
       Member.hasMany(models.Asset, { foreignKey: "memberId" });
     }
+    
   }
   Member.init(
     {

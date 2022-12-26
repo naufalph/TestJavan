@@ -11,14 +11,45 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Nucleus.belongsTo(models.Member, { foreignKey: "parentId" });
+      Nucleus.belongsTo(models.Member, { foreignKey: "childId" });
     }
   }
-  Nucleus.init({
-    parentId: DataTypes.INTEGER,
-    childId: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'Nucleus',
-  });
+  Nucleus.init(
+    {
+      parentId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: {
+            args: true,
+            msg: "ParentId cannot be null",
+          },
+          notEmpty: {
+            args: true,
+            msg: "ParentId cannot be empty",
+          },
+        },
+      },
+      childId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: {
+            args: true,
+            msg: "childId cannot be null",
+          },
+          notEmpty: {
+            args: true,
+            msg: "childId cannot be empty",
+          },
+        },
+      },
+    },
+    {
+      sequelize,
+      modelName: "Nucleus",
+    }
+  );
   return Nucleus;
 };
